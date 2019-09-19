@@ -6,7 +6,7 @@ import org.junit.Test;
 import java.util.stream.IntStream;
 
 import static com.gildedrose.ItemBuilder.builder;
-import static com.gildedrose.ItemWrapper.AGED_BRIE_NAME;
+import static com.gildedrose.ProductType.AGED_BRIE;
 
 public class GildedRoseAgedBrieProductTimelifeTest {
 
@@ -25,7 +25,7 @@ public class GildedRoseAgedBrieProductTimelifeTest {
     @Test
     public void updateQuality_on_single_item_Brie_decrements_sellIn_and_increments_quality_by_one() {
         Item[] items = new Item[] { builder()
-            .name(AGED_BRIE_NAME)
+            .name(AGED_BRIE.getName())
             .sellIn(2)
             .quality(0)
             .build()
@@ -47,7 +47,7 @@ public class GildedRoseAgedBrieProductTimelifeTest {
     @Test
     public void updateQuality_on_single_item_Brie_decrements_sellIn_and_increments_quality_by_two_when_sellIn_is_expired() {
         Item[] items = new Item[] { builder()
-            .name(AGED_BRIE_NAME)
+            .name(AGED_BRIE.getName())
             .sellIn(0)
             .quality(0)
             .build()
@@ -69,7 +69,7 @@ public class GildedRoseAgedBrieProductTimelifeTest {
     @Test
     public void updateQuality_on_single_item_Brie_quality_is_never_more_than_50() {
         Item[] items = new Item[] { builder()
-            .name(AGED_BRIE_NAME)
+            .name(AGED_BRIE.getName())
             .sellIn(0)
             .quality(49)
             .build()

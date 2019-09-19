@@ -8,7 +8,8 @@ import org.junit.Test;
 import org.mockito.InOrder;
 import org.mockito.Mockito;
 
-import static com.gildedrose.ItemWrapper.AGED_BRIE_NAME;
+import static com.gildedrose.ProductType.AGED_BRIE;
+
 
 public class ProductTimelifeTest {
 
@@ -39,7 +40,7 @@ public class ProductTimelifeTest {
         return new ItemWrapper(
             ItemBuilder
                 .builder()
-                .name(AGED_BRIE_NAME)
+                .name(AGED_BRIE.getName())
                 .sellIn(10)
                 .quality(15)
                 .build());

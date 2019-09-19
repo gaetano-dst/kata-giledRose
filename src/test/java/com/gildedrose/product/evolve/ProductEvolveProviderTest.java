@@ -37,4 +37,9 @@ public class ProductEvolveProviderTest {
     public void getEvolve_give_SulfurasProductEvolve_when_ProductType_SULFURAS() {
         Assert.assertEquals(SulfurasProductEvolve.class, getEvolve(ProductType.SULFURAS).getClass());
     }
+
+    @Test
+    public void getEvolve_give_ConjuredProductEvolve_when_ProductType_CONJURED() {
+        Assert.assertEquals(ConjuredProductEvolve.class, getEvolve(ProductType.CONJURED).getClass());
+    }
 }

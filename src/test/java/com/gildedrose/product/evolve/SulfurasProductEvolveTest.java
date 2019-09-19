@@ -5,7 +5,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import static com.gildedrose.ItemBuilder.builder;
-import static com.gildedrose.ItemWrapper.SULFURAS_NAME;
+import static com.gildedrose.ProductType.SULFURAS;
 
 public class SulfurasProductEvolveTest {
 
@@ -14,7 +14,7 @@ public class SulfurasProductEvolveTest {
     @Test
     public void getNextSellInValue_never_change_sellIn_value() {
         ItemWrapper itemWrapper = new ItemWrapper(builder()
-            .name(SULFURAS_NAME)
+            .name(SULFURAS.getName())
             .sellIn(3)
             .quality(10)
             .build());
@@ -25,7 +25,7 @@ public class SulfurasProductEvolveTest {
     @Test
     public void getNextQualityValue_always_give_quality_value_80() {
         ItemWrapper itemWrapper = new ItemWrapper(builder()
-            .name(SULFURAS_NAME)
+            .name(SULFURAS.getName())
             .sellIn(3)
             .quality(10)
             .build());

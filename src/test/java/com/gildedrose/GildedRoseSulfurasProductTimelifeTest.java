@@ -6,7 +6,7 @@ import org.junit.Test;
 import java.util.stream.IntStream;
 
 import static com.gildedrose.ItemBuilder.builder;
-import static com.gildedrose.ItemWrapper.SULFURAS_NAME;
+import static com.gildedrose.ProductType.SULFURAS;
 
 public class GildedRoseSulfurasProductTimelifeTest {
 
@@ -22,7 +22,7 @@ public class GildedRoseSulfurasProductTimelifeTest {
     @Test
     public void updateQuality_on_items_Sulfuras_products_give_always_same_sellIn_and_quality_to_80() {
         Item[] items = new Item[]{builder()
-                .name(SULFURAS_NAME)
+                .name(SULFURAS.getName())
                 .sellIn(0)
                 .quality(80)
                 .build()
@@ -44,7 +44,7 @@ public class GildedRoseSulfurasProductTimelifeTest {
     @Test
     public void updateQuality_on_items_Sulfuras_products_give_always_same_sellIn_and_quality_when_sellIn_expired() {
         Item[] items = new Item[]{builder()
-                .name(SULFURAS_NAME)
+                .name(SULFURAS.getName())
                 .sellIn(-1)
                 .quality(80)
                 .build()
@@ -66,7 +66,7 @@ public class GildedRoseSulfurasProductTimelifeTest {
     @Test
     public void updateQuality_on_items_Sulfuras_products_should_always_be_80() {
         Item[] items = new Item[]{builder()
-                .name(SULFURAS_NAME)
+                .name(SULFURAS.getName())
                 .sellIn(3)
                 .quality(10)
                 .build()

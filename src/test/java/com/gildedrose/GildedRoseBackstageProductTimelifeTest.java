@@ -6,7 +6,7 @@ import org.junit.Test;
 import java.util.stream.IntStream;
 
 import static com.gildedrose.ItemBuilder.builder;
-import static com.gildedrose.ItemWrapper.BACKSTAGE_NAME;
+import static com.gildedrose.ProductType.BACKSTAGE;
 
 public class GildedRoseBackstageProductTimelifeTest {
 
@@ -39,7 +39,7 @@ public class GildedRoseBackstageProductTimelifeTest {
     @Test
     public void updateQuality_on_single_item_Backstage_product_decrements_sellIn_and_increments_quality_both_by_one_when_more_than_10() {
         Item[] items = new Item[]{ builder()
-                .name(BACKSTAGE_NAME)
+                .name(BACKSTAGE.getName())
                 .sellIn(15)
                 .quality(20)
                 .build()
@@ -62,7 +62,7 @@ public class GildedRoseBackstageProductTimelifeTest {
     @Test
     public void updateQuality_on_single_item_Backstage_product_decrements_sellIn_and_increments_quality_both_by_one_when_sellIn_equals_10() {
         Item[] items = new Item[]{ builder()
-                .name(BACKSTAGE_NAME)
+                .name(BACKSTAGE.getName())
                 .sellIn(10)
                 .quality(20)
                 .build()
@@ -84,7 +84,7 @@ public class GildedRoseBackstageProductTimelifeTest {
     @Test
     public void updateQuality_on_single_item_Backstage_product_decrements_sellIn_by_one_and_increments_quality_by_two_when_sellIn_between_5_and_10() {
         Item[] items = new Item[]{ builder()
-            .name(BACKSTAGE_NAME)
+            .name(BACKSTAGE.getName())
             .sellIn(11)
             .quality(20)
             .build()
@@ -107,7 +107,7 @@ public class GildedRoseBackstageProductTimelifeTest {
     @Test
     public void updateQuality_on_single_item_Backstage_product_decrements_sellIn_by_one_and_increments_quality_by_two_when_sellIn_equals_5() {
         Item[] items = new Item[]{ builder()
-            .name(BACKSTAGE_NAME)
+            .name(BACKSTAGE.getName())
             .sellIn(5)
             .quality(20)
             .build()
@@ -129,7 +129,7 @@ public class GildedRoseBackstageProductTimelifeTest {
     @Test
     public void updateQuality_on_single_item_Backstage_product_decrements_sellIn_by_one_and_increments_quality_by_three_when_sellIn_between_0_and_5() {
             Item[] items = new Item[]{ builder()
-            .name(BACKSTAGE_NAME)
+            .name(BACKSTAGE.getName())
             .sellIn(6)
             .quality(20)
             .build()
@@ -151,7 +151,7 @@ public class GildedRoseBackstageProductTimelifeTest {
     @Test
     public void updateQuality_on_single_item_Backstage_product_gives_quality_never_more_than_50() {
                 Item[] items = new Item[]{ builder()
-            .name(BACKSTAGE_NAME)
+            .name(BACKSTAGE.getName())
             .sellIn(15)
             .quality(49)
             .build()
@@ -173,7 +173,7 @@ public class GildedRoseBackstageProductTimelifeTest {
     @Test
     public void updateQuality_on_single_item_Backstage_product_gives_quality_0_when_expired() {
                     Item[] items = new Item[]{ builder()
-            .name(BACKSTAGE_NAME)
+            .name(BACKSTAGE.getName())
             .sellIn(0)
             .quality(49)
             .build()

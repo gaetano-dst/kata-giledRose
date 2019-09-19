@@ -17,8 +17,7 @@ public class ProductEvolveProvider {
         EVOLVES.put(ProductType.DEXTERITY, new DexterityProductEvolve());
         EVOLVES.put(ProductType.ELIXIR, new ElixirProductEvolve());
         EVOLVES.put(ProductType.SULFURAS, new SulfurasProductEvolve());
-        // TODO: Create new feature "Conjured Mana Cake"
-        // TODO: EVOLVES.put(ProductType.CONJURED, new ConjuredProductEvolve());
+        EVOLVES.put(ProductType.CONJURED, new ConjuredProductEvolve());
     }
 
     private ProductEvolveProvider() {

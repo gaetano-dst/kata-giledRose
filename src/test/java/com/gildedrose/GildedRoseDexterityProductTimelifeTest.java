@@ -6,7 +6,7 @@ import org.junit.Test;
 import java.util.stream.IntStream;
 
 import static com.gildedrose.ItemBuilder.builder;
-import static com.gildedrose.ItemWrapper.DEXTERITY_NAME;
+import static com.gildedrose.ProductType.DEXTERITY;
 
 public class GildedRoseDexterityProductTimelifeTest {
 
@@ -24,7 +24,7 @@ public class GildedRoseDexterityProductTimelifeTest {
     @Test
     public void updateQuality_on_single_item_Dexterity_product_decrements_both_sellIn_and_quality_by_one() {
         Item[] items = new Item[]{builder()
-                .name(DEXTERITY_NAME)
+                .name(DEXTERITY.getName())
                 .sellIn(10)
                 .quality(20)
                 .build()
@@ -46,7 +46,7 @@ public class GildedRoseDexterityProductTimelifeTest {
     @Test
     public void updateQuality_on_single_item_Dexterity_product_decrements_sellIn_by_one_and_quality_by_two_when_sellIn_is_expired() {
             Item[] items = new Item[]{builder()
-                    .name(DEXTERITY_NAME)
+                    .name(DEXTERITY.getName())
                     .sellIn(0)
                     .quality(20)
                     .build()
@@ -68,7 +68,7 @@ public class GildedRoseDexterityProductTimelifeTest {
     @Test
     public void updateQuality_on_single_item_Dexterity_product_quality_is_never_less_than_0() {
                 Item[] items = new Item[]{builder()
-                        .name(DEXTERITY_NAME)
+                        .name(DEXTERITY.getName())
                         .sellIn(0)
                         .quality(1)
                         .build()

@@ -5,7 +5,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import static com.gildedrose.ItemBuilder.builder;
-import static com.gildedrose.ItemWrapper.DEXTERITY_NAME;
+import static com.gildedrose.ProductType.DEXTERITY;
 
 public class DexterityProductEvolveTest {
 
@@ -14,7 +14,7 @@ public class DexterityProductEvolveTest {
     @Test
     public void getNextSellInValue_decrements_sellIn_by_1() {
         ItemWrapper itemWrapper = new ItemWrapper(builder()
-            .name(DEXTERITY_NAME)
+            .name(DEXTERITY.getName())
             .sellIn(3)
             .quality(10)
             .build());
@@ -25,7 +25,7 @@ public class DexterityProductEvolveTest {
     @Test
     public void getNextQualityValue_decrements_quality_by_2_when_sellIn_less_than_0() {
         ItemWrapper itemWrapper = new ItemWrapper(builder()
-            .name(DEXTERITY_NAME)
+            .name(DEXTERITY.getName())
             .sellIn(-1)
             .quality(10)
             .build());
@@ -36,7 +36,7 @@ public class DexterityProductEvolveTest {
     @Test
     public void getNextQualityValue_decrements_quality_by_1_when_sellIn_more_than_0() {
         ItemWrapper itemWrapper = new ItemWrapper(builder()
-            .name(DEXTERITY_NAME)
+            .name(DEXTERITY.getName())
             .sellIn(10)
             .quality(10)
             .build());
@@ -47,7 +47,7 @@ public class DexterityProductEvolveTest {
     @Test
     public void getNextQualityValue_never_gives_quality_less_than_0() {
         ItemWrapper itemWrapper = new ItemWrapper(builder()
-            .name(DEXTERITY_NAME)
+            .name(DEXTERITY.getName())
             .sellIn(-1)
             .quality(1)
             .build());

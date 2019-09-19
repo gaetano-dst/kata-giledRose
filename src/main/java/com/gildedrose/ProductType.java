@@ -9,8 +9,8 @@ public enum ProductType {
     BACKSTAGE("Backstage passes to a TAFKAL80ETC concert"),
     DEXTERITY("+5 Dexterity Vest"),
     ELIXIR("Elixir of the Mongoose"),
-    SULFURAS("Sulfuras, Hand of Ragnaros");
-    // TODO: Create new feature "Conjured Mana Cake"
+    SULFURAS("Sulfuras, Hand of Ragnaros"),
+    CONJURED("Conjured Mana Cake");
 
     private final String name;
 
