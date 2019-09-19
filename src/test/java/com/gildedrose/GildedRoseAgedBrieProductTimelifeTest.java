@@ -1,11 +1,12 @@
 package com.gildedrose;
 
-import java.util.stream.IntStream;
-
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.stream.IntStream;
+
 import static com.gildedrose.ItemBuilder.builder;
+import static com.gildedrose.ItemWrapper.AGED_BRIE_NAME;
 
 public class GildedRoseAgedBrieProductTimelifeTest {
 
@@ -22,65 +23,68 @@ public class GildedRoseAgedBrieProductTimelifeTest {
 
 
     @Test
-    public void updateQuality_on_single_item_Brie_gives_decrement_sellIn_and_increment_quality_by_one() {
-        GildedRose app = new GildedRose(new Item[] {
-            builder()
-                .name("Aged Brie")
-                .sellIn(2)
-                .quality(0)
-                .build()
-        });
+    public void updateQuality_on_single_item_Brie_decrements_sellIn_and_increments_quality_by_one() {
+        Item[] items = new Item[] { builder()
+            .name(AGED_BRIE_NAME)
+            .sellIn(2)
+            .quality(0)
+            .build()
+        };
 
-        Assert.assertEquals(app.items[0].sellIn, EXPECTED_SELL_IN_DECREMENT_BY_ONE[0]);
-        Assert.assertEquals(app.items[0].quality, EXPECTED_QUALITY_INCREMENTS_BY_ONE[0]);
+        GildedRose gildedRoseBis = new GildedRose(items);
+
+        Assert.assertEquals(gildedRoseBis.items[0].sellIn, EXPECTED_SELL_IN_DECREMENT_BY_ONE[0]);
+        Assert.assertEquals(gildedRoseBis.items[0].quality, EXPECTED_QUALITY_INCREMENTS_BY_ONE[0]);
 
         IntStream.range(1, AGING_DAYS_2)
                 .forEach(day -> {
-                    app.updateQuality();
-                    Assert.assertEquals(app.items[0].sellIn, EXPECTED_SELL_IN_DECREMENT_BY_ONE[day]);
-                    Assert.assertEquals(app.items[0].quality, EXPECTED_QUALITY_INCREMENTS_BY_ONE[day]);
+                    gildedRoseBis.updateQuality();
+                    Assert.assertEquals(gildedRoseBis.items[0].sellIn, EXPECTED_SELL_IN_DECREMENT_BY_ONE[day]);
+                    Assert.assertEquals(gildedRoseBis.items[0].quality, EXPECTED_QUALITY_INCREMENTS_BY_ONE[day]);
                 });
     }
 
     @Test
-    public void updateQuality_on_single_item_Brie_gives_decrement_sellIn_and_increment_quality_by_two_when_sellIn_is_expired() {
-        GildedRose app = new GildedRose(new Item[] {
-            builder()
-                .name("Aged Brie")
-                .sellIn(0)
-                .quality(0)
-                .build()
-        });
+    public void updateQuality_on_single_item_Brie_decrements_sellIn_and_increments_quality_by_two_when_sellIn_is_expired() {
+        Item[] items = new Item[] { builder()
+            .name(AGED_BRIE_NAME)
+            .sellIn(0)
+            .quality(0)
+            .build()
+        };
 
-        Assert.assertEquals(app.items[0].sellIn, EXPECTED_SELL_IN_ALWAYS_DECREMENT_BY_ONE[0]);
-        Assert.assertEquals(app.items[0].quality, EXPECTED_QUALITY_INCREMENTS_BY_TWO_WHEN_EXPIRED[0]);
+        GildedRose gildedRoseBis = new GildedRose(items);
+
+        Assert.assertEquals(gildedRoseBis.items[0].sellIn, EXPECTED_SELL_IN_ALWAYS_DECREMENT_BY_ONE[0]);
+        Assert.assertEquals(gildedRoseBis.items[0].quality, EXPECTED_QUALITY_INCREMENTS_BY_TWO_WHEN_EXPIRED[0]);
 
         IntStream.range(1, AGING_DAYS_3)
                 .forEach(day -> {
-                    app.updateQuality();
-                    Assert.assertEquals(app.items[0].sellIn, EXPECTED_SELL_IN_ALWAYS_DECREMENT_BY_ONE[day]);
-                    Assert.assertEquals(app.items[0].quality, EXPECTED_QUALITY_INCREMENTS_BY_TWO_WHEN_EXPIRED[day]);
+                    gildedRoseBis.updateQuality();
+                    Assert.assertEquals(gildedRoseBis.items[0].sellIn, EXPECTED_SELL_IN_ALWAYS_DECREMENT_BY_ONE[day]);
+                    Assert.assertEquals(gildedRoseBis.items[0].quality, EXPECTED_QUALITY_INCREMENTS_BY_TWO_WHEN_EXPIRED[day]);
                 });
     }
 
     @Test
     public void updateQuality_on_single_item_Brie_quality_is_never_more_than_50() {
-        GildedRose app = new GildedRose(new Item[] {
-            builder()
-                .name("Aged Brie")
-                .sellIn(0)
-                .quality(49)
-                .build()
-        });
+        Item[] items = new Item[] { builder()
+            .name(AGED_BRIE_NAME)
+            .sellIn(0)
+            .quality(49)
+            .build()
+        };
 
-        Assert.assertEquals(app.items[0].sellIn, EXPECTED_SELL_IN_ALWAYS_DECREMENT_BY_ONE[0]);
-        Assert.assertEquals(app.items[0].quality, EXPECTED_QUALITY_NEVER_MORE_THAN_50[0]);
+        GildedRose gildedRoseBis = new GildedRose(items);
+
+        Assert.assertEquals(gildedRoseBis.items[0].sellIn, EXPECTED_SELL_IN_ALWAYS_DECREMENT_BY_ONE[0]);
+        Assert.assertEquals(gildedRoseBis.items[0].quality, EXPECTED_QUALITY_NEVER_MORE_THAN_50[0]);
 
         IntStream.range(1, AGING_DAYS_3)
                 .forEach(day -> {
-                    app.updateQuality();
-                    Assert.assertEquals(app.items[0].sellIn, EXPECTED_SELL_IN_ALWAYS_DECREMENT_BY_ONE[day]);
-                    Assert.assertEquals(app.items[0].quality, EXPECTED_QUALITY_NEVER_MORE_THAN_50[day]);
+                    gildedRoseBis.updateQuality();
+                    Assert.assertEquals(gildedRoseBis.items[0].sellIn, EXPECTED_SELL_IN_ALWAYS_DECREMENT_BY_ONE[day]);
+                    Assert.assertEquals(gildedRoseBis.items[0].quality, EXPECTED_QUALITY_NEVER_MORE_THAN_50[day]);
                 });
     }
 }

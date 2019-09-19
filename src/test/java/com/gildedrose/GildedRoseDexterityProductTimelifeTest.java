@@ -1,11 +1,12 @@
 package com.gildedrose;
 
-import java.util.stream.IntStream;
-
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.stream.IntStream;
+
 import static com.gildedrose.ItemBuilder.builder;
+import static com.gildedrose.ItemWrapper.DEXTERITY_NAME;
 
 public class GildedRoseDexterityProductTimelifeTest {
 
@@ -21,65 +22,68 @@ public class GildedRoseDexterityProductTimelifeTest {
     private static final int[] EXPECTED_QUALITY_NEVER_LESS_THAN_0 = new int[] { 1, 0, 0 };
 
     @Test
-    public void updateQuality_on_single_item_Dexterity_product_gives_decrement_both_sellIn_and_quality_by_one() {
-        GildedRose app = new GildedRose(new Item[] {
-            builder()
-            .name("+5 Dexterity Vest")
-            .sellIn(10)
-            .quality(20)
-            .build()
-        });
+    public void updateQuality_on_single_item_Dexterity_product_decrements_both_sellIn_and_quality_by_one() {
+        Item[] items = new Item[]{builder()
+                .name(DEXTERITY_NAME)
+                .sellIn(10)
+                .quality(20)
+                .build()
+        };
 
-        Assert.assertEquals(app.items[0].sellIn, EXPECTED_SELL_IN_DECREMENTS_BY_ONE[0]);
-        Assert.assertEquals(app.items[0].quality, EXPECTED_QUALITY_DECREMENTS_BY_ONE[0]);
+        GildedRose gildedRoseBis = new GildedRose(items);
+
+        Assert.assertEquals(gildedRoseBis.items[0].sellIn, EXPECTED_SELL_IN_DECREMENTS_BY_ONE[0]);
+        Assert.assertEquals(gildedRoseBis.items[0].quality, EXPECTED_QUALITY_DECREMENTS_BY_ONE[0]);
 
         IntStream.range(1, AGING_DAYS_2)
                 .forEach(day -> {
-                    app.updateQuality();
-                    Assert.assertEquals(app.items[0].sellIn, EXPECTED_SELL_IN_DECREMENTS_BY_ONE[day]);
-                    Assert.assertEquals(app.items[0].quality, EXPECTED_QUALITY_DECREMENTS_BY_ONE[day]);
+                    gildedRoseBis.updateQuality();
+                    Assert.assertEquals(gildedRoseBis.items[0].sellIn, EXPECTED_SELL_IN_DECREMENTS_BY_ONE[day]);
+                    Assert.assertEquals(gildedRoseBis.items[0].quality, EXPECTED_QUALITY_DECREMENTS_BY_ONE[day]);
                 });
     }
 
     @Test
-    public void updateQuality_on_single_item_Dexterity_product_gives_decrement_sellIn_by_one_and_quality_by_two_when_sellIn_is_expired() {
-        GildedRose app = new GildedRose(new Item[] {
-            builder()
-                .name("+5 Dexterity Vest")
-                .sellIn(0)
-                .quality(20)
-                .build()
-        });
+    public void updateQuality_on_single_item_Dexterity_product_decrements_sellIn_by_one_and_quality_by_two_when_sellIn_is_expired() {
+            Item[] items = new Item[]{builder()
+                    .name(DEXTERITY_NAME)
+                    .sellIn(0)
+                    .quality(20)
+                    .build()
+            };
 
-        Assert.assertEquals(app.items[0].sellIn, EXPECTED_SELL_IN_ALWAYS_DECREMENTS_BY_ONE[0]);
-        Assert.assertEquals(app.items[0].quality, EXPECTED_QUALITY_DECREMENTS_BY_TWO_WHEN_EXPIRED[0]);
+        GildedRose gildedRoseBis = new GildedRose(items);
+
+        Assert.assertEquals(gildedRoseBis.items[0].sellIn, EXPECTED_SELL_IN_ALWAYS_DECREMENTS_BY_ONE[0]);
+        Assert.assertEquals(gildedRoseBis.items[0].quality, EXPECTED_QUALITY_DECREMENTS_BY_TWO_WHEN_EXPIRED[0]);
 
         IntStream.range(1, AGING_DAYS_3)
                 .forEach(day -> {
-                    app.updateQuality();
-                    Assert.assertEquals(app.items[0].sellIn, EXPECTED_SELL_IN_ALWAYS_DECREMENTS_BY_ONE[day]);
-                    Assert.assertEquals(app.items[0].quality, EXPECTED_QUALITY_DECREMENTS_BY_TWO_WHEN_EXPIRED[day]);
+                    gildedRoseBis.updateQuality();
+                    Assert.assertEquals(gildedRoseBis.items[0].sellIn, EXPECTED_SELL_IN_ALWAYS_DECREMENTS_BY_ONE[day]);
+                    Assert.assertEquals(gildedRoseBis.items[0].quality, EXPECTED_QUALITY_DECREMENTS_BY_TWO_WHEN_EXPIRED[day]);
                 });
     }
 
     @Test
     public void updateQuality_on_single_item_Dexterity_product_quality_is_never_less_than_0() {
-        GildedRose app = new GildedRose(new Item[] {
-            builder()
-                .name("+5 Dexterity Vest")
-                .sellIn(0)
-                .quality(1)
-                .build()
-        });
+                Item[] items = new Item[]{builder()
+                        .name(DEXTERITY_NAME)
+                        .sellIn(0)
+                        .quality(1)
+                        .build()
+                };
 
-        Assert.assertEquals(app.items[0].sellIn, EXPECTED_SELL_IN_ALWAYS_DECREMENTS_BY_ONE[0]);
-        Assert.assertEquals(app.items[0].quality, EXPECTED_QUALITY_NEVER_LESS_THAN_0[0]);
+        GildedRose gildedRoseBis = new GildedRose(items);
+
+        Assert.assertEquals(gildedRoseBis.items[0].sellIn, EXPECTED_SELL_IN_ALWAYS_DECREMENTS_BY_ONE[0]);
+        Assert.assertEquals(gildedRoseBis.items[0].quality, EXPECTED_QUALITY_NEVER_LESS_THAN_0[0]);
 
         IntStream.range(1, AGING_DAYS_3)
                 .forEach(day -> {
-                    app.updateQuality();
-                    Assert.assertEquals(app.items[0].sellIn, EXPECTED_SELL_IN_ALWAYS_DECREMENTS_BY_ONE[day]);
-                    Assert.assertEquals(app.items[0].quality, EXPECTED_QUALITY_NEVER_LESS_THAN_0[day]);
+                    gildedRoseBis.updateQuality();
+                    Assert.assertEquals(gildedRoseBis.items[0].sellIn, EXPECTED_SELL_IN_ALWAYS_DECREMENTS_BY_ONE[day]);
+                    Assert.assertEquals(gildedRoseBis.items[0].quality, EXPECTED_QUALITY_NEVER_LESS_THAN_0[day]);
                 });
     }
 }
